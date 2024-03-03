@@ -16,7 +16,7 @@ import (
 
 func main() {
 	// Database initialization
-	db, err := sql.Open("postgres", "postgres://postgres:1234@localhost/adv_prog?sslmode=disable")
+	db, err := sql.Open("postgres", "postgres://adv_prog_user:SqD3b8CjbxsWAm6v7zr9bOb5Chqqh2bp@dpg-cni09m821fec73cohibg-a/adv_prog")
 	if err != nil {
 		panic(err)
 	}
