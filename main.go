@@ -28,6 +28,41 @@ func main() {
 	// Initialize filtering package
 	filtering.Init(db)
 
+	createUsersTableSQL := `
+		CREATE TABLE IF NOT EXISTS users (
+			id SERIAL PRIMARY KEY,
+			username VARCHAR(255) UNIQUE,
+			email VARCHAR(255) UNIQUE,
+			password VARCHAR(255),
+			firstname VARCHAR(255),
+			lastname VARCHAR(255),
+			age INTEGER,
+			role VARCHAR(50)
+		);
+	`
+
+	_, err = db.Exec(createUsersTableSQL)
+	if err != nil {
+		panic(err)
+	}
+
+	createBarbersTableSQL := `
+		CREATE TABLE IF NOT EXISTS barbers (
+			id SERIAL PRIMARY KEY,
+			name VARCHAR(255),
+			basic_info TEXT,
+			price INTEGER,
+			experience INTEGER,
+			status TEXT,
+			image_path TEXT
+		);
+	`
+
+	_, err = db.Exec(createBarbersTableSQL)
+	if err != nil {
+		panic(err)
+	}
+
 	r := mux.NewRouter()
 	r.HandleFunc("/", auth.IndexHandler).Methods("GET")
 	r.HandleFunc("/register", auth.RegisterHandler).Methods("GET", "POST")
